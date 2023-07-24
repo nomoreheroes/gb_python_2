@@ -1,6 +1,7 @@
-from random import choice
+from random import choice, randint
 from math import sqrt, floor
 from decimal import Decimal, getcontext
+import time
 
 #task 10
 print("Задача 10\n\n")
@@ -59,4 +60,45 @@ while n > 0:
     s += n % 10
     n = n // 10
 print("Общая сумма цифр в числе = {0}".format(s))
+print ("\n----------\n")
+
+#task 2 add
+print("Задача 2 дополнительная\n")
+start = time.time()
+for case in range(100):
+    #количество предикат
+    n = randint(3,15)
+    #генерируем предикаты
+    predicates = []
+    for i in range(n):
+        predicates.append(choice([True, False]))
+    #проверяем утверждение
+    rs1 = predicates[0]
+    rs2 = not predicates[0]
+    for p in predicates[1:]:
+        rs1 = rs1 or p
+        rs2 = rs2 and not p
+    rs1 = not rs1
+    print("Случай {0}, количество предикатов {1}, результат сравнения {2}".format(case+1,n,rs1==rs2))
+end = time.time()
+print("Выполнение программы заняло {0} секунд".format(end-start))
+print ("\n----------\n")
+
+#task 3 add
+print("Задача 3 дополнительная\n")
+def all_divisors(number):
+    rs = []
+    x = number
+    while x > 0:
+        if number % x == 0:
+            rs.append(x)
+        x -= 1
+    rs = sorted(rs,reverse = True)
+    return rs
+print ("Положительные делители числа 23436: {0}".format(all_divisors(23436)))
+print ("Положительные делители числа 190187200: {0}".format(all_divisors(190187200)))
+#можно посчитать, но очень долго
+#print ("Положительные делители числа 380457890232: {0}".format(all_divisors(380457890232)))
+n = int(input("Введите любое число:\n"))
+print ("Положительные делители числа {0}: {1}".format(n, all_divisors(n)))
 print ("\n----------\n")
